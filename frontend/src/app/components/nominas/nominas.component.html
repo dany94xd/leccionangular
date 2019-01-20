@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form #nominaForm="ngForm" (ngSubmit)="addNomina(nominaForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)] = "nominaService.selectedNomina._id">
+            <div class="row">
+              <div class="input-field col s12">
+                <!-- <input type="text" name="id_empleado" #name="ngModel" [(ngModel)]="nominaService.selectedNomina.id_empleado" placeholder="Ingresa el ID"> -->
+                <input type="text" name="nif" #name="ngModel" [(ngModel)]="nominaService.selectedNomina.nif" placeholder="Ingresa el NIF">
+                <input type="text" name="mes" #name="ngModel" [(ngModel)]="nominaService.selectedNomina.mes" placeholder="Ingresa su mes">
+                <input type="text" name="importe" #name="ngModel" [(ngModel)]="nominaService.selectedNomina.importe" placeholder="Ingresa su importe">
+                <!-- <input type="text" name="irpf" #name="ngModel" [(ngModel)]="nominaService.selectedNomina.irpf" placeholder="Ingresa el NIF"> -->
+                                
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn right" style="margin-left: 2px" (click)="resetForm(nominaForm)">Limpiar</button>
+                    <button class="btn right">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table>
+        <thead>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Mes</th>
+          <th>Importe</th>
+          <!-- <th>IRPF</th> -->
+        </thead>
+        <tbody *ngFor="let employee of employeeService.employees">
+          <tr *ngFor="let nomina of nominaService.nominas">
+            <td>{{employee.name}}</td>
+            <td>{{employee.lastname}}</td>
+            <td>{{nomina.mes}}</td>
+            <td>{{nomina.importe}}</td>
+            <!-- <td>{{nomina.irpf}}</td> -->
+            <td>
+              <a (click)="editNomina(nomina)">
+                <i class="material-icons">edit</i>
+              </a>
+              <a (click)="deleteNomina(nomina._id)">
+                  <i class="material-icons">delete</i>
+                </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

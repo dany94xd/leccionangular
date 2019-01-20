@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form #vacacionForm="ngForm" (ngSubmit)="addVacacion(vacacionForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)] = "vacacionService.selectedVacacion._id">
+            <div class="row">
+              <div class="input-field col s12">
+                <!-- <input type="text" name="id_empleado" #name="ngModel" [(ngModel)]="vacacionService.selectedVacacion.id_empleado" placeholder="Ingresa el ID"> -->
+                <input type="text" name="nif" #name="ngModel" [(ngModel)]="vacacionService.selectedVacacion.nif" placeholder="Ingresa el nif">
+                <input type="date" name="finicio" #name="ngModel" [(ngModel)]="vacacionService.selectedVacacion.finicio" placeholder="Ingresa la fecha de inicio">
+                <input type="date" name="ffin" #name="ngModel" [(ngModel)]="vacacionService.selectedVacacion.ffin" placeholder="Ingresa la fecha de fin">
+                <input type="text" name="diasusados" #name="ngModel" [(ngModel)]="vacacionService.selectedVacacion.diasusados" placeholder="Ingresa los numeros de dias usados">
+                                
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn right" style="margin-left: 2px" (click)="resetForm(vacacionForm)">Limpiar</button>
+                    <button class="btn right">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table>
+        <thead>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Dias Usados</th>
+        </thead>
+        <tbody *ngFor="let employee of employeeService.employees">
+          <tr *ngFor="let vacacion of vacacionService.vacaciones">
+            <td>{{employee.name}}</td>
+            <td>{{employee.lastname}}</td>
+            <td>{{vacacion.finicio}}</td>
+            <td>{{vacacion.ffin}}</td>
+            <td>{{vacacion.diasusados}}</td>
+            <td>
+              <a (click)="editVacacion(vacacion)">
+                <i class="material-icons">edit</i>
+              </a>
+              <a (click)="deleteVacacion(vacacion._id)">
+                  <i class="material-icons">delete</i>
+                </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
